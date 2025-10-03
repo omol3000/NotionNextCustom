@@ -58,20 +58,19 @@ const Nav = props => {
               {siteConfig('NOBELIUM_NAV_NOTION_ICON') ? (
                 <LazyImage
                   src={siteInfo?.icon}
-                  width={96}
-                  height={96}
+                  width={48}
+                  height={48}
                   alt={siteConfig('TITLE')}
                 />
               ) : (
                 <SvgIcon />
               )}
             </div>
-
-            <p className='logo line-clamp-1 overflow-ellipsis ml-2 text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-300 header-name whitespace-nowrap'>
+          </SmartLink>
+            <p className='logo line-clamp-1 overflow-ellipsis ml-2 text-lg md:text-xl font-medium text-gray-800 dark:text-gray-300 header-name whitespace-nowrap'>
               {siteConfig('TITLE')}
               {/* ,{' '}<span className="font-normal">{siteConfig('DESCRIPTION')}</span> */}
             </p>
-          </SmartLink>
         </div>
         <NavBar {...props} />
       </div>
