@@ -92,9 +92,13 @@ function generateLocalesSitemap(link, allPages, locale) {
         const slugWithoutLeadingSlash = post?.slug.startsWith('/')
           ? post?.slug?.slice(1)
           : post.slug
+        const postDate = post?.publishDate ? new Date(post.publishDate) : new Date(post?.publishDay)
+        const lastmod = !postDate || isNaN(postDate.getTime())
+          ? dateNow
+          : postDate.toISOString().split('T')[0]
         return {
           loc: `${link}${locale}/${slugWithoutLeadingSlash}`,
-          lastmod: new Date(post?.publishDay).toISOString().split('T')[0],
+          lastmod,
           changefreq: 'daily',
           priority: '0.7'
         }

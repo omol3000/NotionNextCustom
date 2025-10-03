@@ -184,8 +184,15 @@ const SEO = props => {
       {/* 文章特定元数据 */}
       {meta?.type === 'Post' && (
         <>
-          <meta property='article:published_time' content={meta.publishDay} />
-          <meta property='article:modified_time' content={meta.lastEditedDay} />
+          {/* prefer numeric publishDate for machine-readable time, fallback to publishDay */}
+          <meta
+            property='article:published_time'
+            content={meta.publishDate ? new Date(meta.publishDate).toISOString() : meta.publishDay}
+          />
+          <meta
+            property='article:modified_time'
+            content={meta.lastEditedDate ? new Date(meta.lastEditedDate).toISOString() : meta.lastEditedDay || meta.publishDay}
+          />
           <meta property='article:author' content={AUTHOR} />
           <meta property='article:section' content={category} />
           <meta property='article:tag' content={keywords} />
@@ -246,7 +253,7 @@ const generateStructuredData = (meta, siteInfo, url, image, author) => {
   }
 
   // 如果是文章页面，添加文章结构化数据
-  if (meta?.type === 'Post') {
+      if (meta?.type === 'Post') {
     return {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
@@ -254,8 +261,8 @@ const generateStructuredData = (meta, siteInfo, url, image, author) => {
       description: meta.description,
       image: image,
       url: url,
-      datePublished: meta.publishDay,
-      dateModified: meta.lastEditedDay || meta.publishDay,
+      datePublished: meta.publishDate ? new Date(meta.publishDate).toISOString() : meta.publishDay,
+      dateModified: meta.lastEditedDate ? new Date(meta.lastEditedDate).toISOString() : meta.lastEditedDay || meta.publishDay,
       author: {
         '@type': 'Person',
         name: author
