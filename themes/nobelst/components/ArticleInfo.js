@@ -6,9 +6,11 @@ import { siteConfig } from '@/lib/config'
 import NotionIcon from '@/components/NotionIcon'
 
 export const ArticleInfo = (props) => {
-  const { post } = props
+    const { post } = props
 
-  const emailHash = md5(siteConfig('CONTACT_EMAIL', '#'))
+        const contactEmail = siteConfig('CONTACT_EMAIL', null)
+        const emailHash = contactEmail ? md5(contactEmail) : null
+        const authorImage = siteConfig('AUTHOR_IMAGE', null)
 
   return <section className="flex-wrap flex mt-2 text-gray--600 dark:text-gray-400 font-light leading-8">
         <div>
@@ -20,12 +22,18 @@ export const ArticleInfo = (props) => {
             {post?.type !== 'Page' && <>
                 <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400">
                     <div className="flex mb-4">
-                        <a href={siteConfig('CONTACT_EMAIL', '#')} className="flex">
+                        <a href={siteConfig('CONTACT_LINKEDIN', '#')} className="flex">
                             <Image
                                 alt={siteConfig('AUTHOR')}
                                 width={24}
                                 height={24}
-                                src={`https://gravatar.com/avatar/${emailHash}`}
+                                src={
+                                  authorImage
+                                    ? authorImage
+                                    : emailHash
+                                    ? `https://gravatar.com/avatar/${emailHash}`
+                                    : '/default-avatar.png'
+                                }
                                 className="rounded-full"
                             />
                             <p className="ml-2 md:block">{siteConfig('AUTHOR')}</p>
@@ -42,11 +50,13 @@ export const ArticleInfo = (props) => {
                             ))}
                         </div>
                     )}
+                    {/*
                     <span className="hidden busuanzi_container_page_pv mr-2">
                         <i className='mr-1 fas fa-eye' />
                         &nbsp;
                         <span className="mr-2 busuanzi_value_page_pv" />
                     </span>
+                    */}
                 </nav>
             </>}
 
