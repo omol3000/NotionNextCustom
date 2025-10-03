@@ -23,19 +23,21 @@ export const ArticleInfo = (props) => {
                 <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400">
                     <div className="flex mb-4">
                         <a href={siteConfig('CONTACT_LINKEDIN', '#')} className="flex">
-                            <Image
-                                alt={siteConfig('AUTHOR')}
-                                width={24}
-                                height={24}
-                                src={
-                                  authorImage
-                                    ? authorImage
-                                    : emailHash
-                                    ? `https://gravatar.com/avatar/${emailHash}`
-                                    : '/default-avatar.png'
-                                }
-                                className="rounded-full"
-                            />
+                                                        {/*
+                                                        <Image
+                                                                alt={siteConfig('AUTHOR')}
+                                                                width={24}
+                                                                height={24}
+                                                                src={
+                                                                    authorImage
+                                                                        ? authorImage
+                                                                        : emailHash
+                                                                        ? `https://gravatar.com/avatar/${emailHash}`
+                                                                        : '/default-avatar.png'
+                                                                }
+                                                                className="rounded-full"
+                                                        />
+                                                        */}
                             <p className="ml-2 md:block">{siteConfig('AUTHOR')}</p>
                         </a>
                         <span className="block">&nbsp;/&nbsp;</span>
