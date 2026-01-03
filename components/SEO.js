@@ -137,8 +137,8 @@ const SEO = props => {
 
       {/* 语言和地区 */}
       <meta httpEquiv='content-language' content={siteConfig('LANG')} />
-      <meta name='geo.region' content={siteConfig('GEO_REGION', 'CN')} />
-      <meta name='geo.country' content={siteConfig('GEO_COUNTRY', 'CN')} />
+      <meta name='geo.region' content={siteConfig('GEO_REGION', 'DE')} />
+      <meta name='geo.country' content={siteConfig('GEO_COUNTRY', 'DE')} />
       {/* Open Graph 元数据 */}
       <meta property='og:locale' content={lang} />
       <meta property='og:title' content={title} />
