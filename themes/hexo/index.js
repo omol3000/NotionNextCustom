@@ -181,7 +181,7 @@ const LayoutPostList = props => {
   return (
     <div className='pt-8'>
       <SlotBar {...props} />
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
+      {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
         <BlogPostListPage {...props} />
       ) : (
         <BlogPostListScroll {...props} />
@@ -220,7 +220,7 @@ const LayoutSearch = props => {
       ) : (
         <div id='posts-wrapper'>
           {' '}
-          {siteConfig('POST_LIST_STYLE') === 'page' ? (
+          {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
             <BlogPostListPage {...props} />
           ) : (
             <BlogPostListScroll {...props} />

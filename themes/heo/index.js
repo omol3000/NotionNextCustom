@@ -142,7 +142,7 @@ const LayoutIndex = props => {
     <div id='post-outer-wrapper' className='px-5 md:px-0'>
       {/* 文章分类条 */}
       <CategoryBar {...props} />
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
+      {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
         <BlogPostListPage {...props} />
       ) : (
         <BlogPostListScroll {...props} />
@@ -161,7 +161,7 @@ const LayoutPostList = props => {
     <div id='post-outer-wrapper' className='px-5  md:px-0'>
       {/* 文章分类条 */}
       <CategoryBar {...props} />
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
+      {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
         <BlogPostListPage {...props} />
       ) : (
         <BlogPostListScroll {...props} />
@@ -202,7 +202,7 @@ const LayoutSearch = props => {
           <SearchNav {...props} />
         ) : (
           <div id='posts-wrapper'>
-            {siteConfig('POST_LIST_STYLE') === 'page' ? (
+            {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
               <BlogPostListPage {...props} />
             ) : (
               <BlogPostListScroll {...props} />

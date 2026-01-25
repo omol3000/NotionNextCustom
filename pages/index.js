@@ -36,9 +36,9 @@ export async function getStaticProps(req) {
   )
 
   // 处理分页
-  if (siteConfig('POST_LIST_STYLE') === 'scroll') {
+  if (siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'scroll') {
     // 滚动列表默认给前端返回所有数据
-  } else if (siteConfig('POST_LIST_STYLE') === 'page') {
+  } else if (siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page') {
     props.posts = props.posts?.slice(
       0,
       siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
