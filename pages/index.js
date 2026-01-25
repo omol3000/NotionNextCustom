@@ -28,7 +28,7 @@ export async function getStaticProps(req) {
   const props = await getGlobalData({ from, locale })
   const POST_PREVIEW_LINES = siteConfig(
     'POST_PREVIEW_LINES',
-    12,
+    null,
     props?.NOTION_CONFIG
   )
   props.posts = props.allPages?.filter(
@@ -41,12 +41,12 @@ export async function getStaticProps(req) {
   } else if (siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page') {
     props.posts = props.posts?.slice(
       0,
-      siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
+      siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
     )
   }
 
   // 预览文章内容
-  if (siteConfig('POST_LIST_PREVIEW', false, props?.NOTION_CONFIG)) {
+  if (siteConfig('POST_LIST_PREVIEW', null, props?.NOTION_CONFIG)) {
     for (const i in props.posts) {
       const post = props.posts[i]
       if (post.password && post.password !== '') {
@@ -64,7 +64,7 @@ export async function getStaticProps(req) {
   generateSitemapXml(props)
   // 检查数据是否需要从algolia删除
   checkDataFromAlgolia(props)
-  if (siteConfig('UUID_REDIRECT', false, props?.NOTION_CONFIG)) {
+  if (siteConfig('UUID_REDIRECT', null, props?.NOTION_CONFIG)) {
     // 生成重定向 JSON
     generateRedirectJson(props)
   }

@@ -33,7 +33,7 @@ export async function getStaticProps({ params: { category }, locale }) {
   } else if (siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page') {
     props.posts = props.posts?.slice(
       0,
-      siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
+      siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
     )
   }
 

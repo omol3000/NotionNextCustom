@@ -15,14 +15,14 @@ export const BlogListScroll = props => {
   const postsToShow = posts
     ? Object.assign(posts).slice(
         0,
-        parseInt(siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)) * page
+        parseInt(siteConfig('POSTS_PER_PAGE', 20, props?.NOTION_CONFIG)) * page
       )
     : []
 
   if (posts) {
     const totalCount = posts.length
     hasMore =
-      page * parseInt(siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)) <
+      page * parseInt(siteConfig('POSTS_PER_PAGE', 20, props?.NOTION_CONFIG)) <
       totalCount
   }
   const handleGetMore = () => {

@@ -41,7 +41,7 @@ export async function getStaticProps({ params: { page }, locale }) {
   const allPosts = allPages?.filter(
     page => page.type === 'Post' && page.status === 'Published'
   )
-  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
+  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
   // 处理分页
   props.posts = allPosts.slice(
     POSTS_PER_PAGE * (page - 1),
@@ -50,7 +50,7 @@ export async function getStaticProps({ params: { page }, locale }) {
   props.page = page
 
   // 处理预览
-  if (siteConfig('POST_LIST_PREVIEW', false, props?.NOTION_CONFIG)) {
+  if (siteConfig('POST_LIST_PREVIEW', null, props?.NOTION_CONFIG)) {
     for (const i in props.posts) {
       const post = props.posts[i]
       if (post.password && post.password !== '') {

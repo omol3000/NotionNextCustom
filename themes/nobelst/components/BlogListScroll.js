@@ -16,7 +16,7 @@ export const BlogListScroll = props => {
     posts && Array.isArray(posts)
       ? deepClone(posts).slice(
           0,
-          parseInt(siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)) *
+          parseInt(siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)) *
             page
         )
       : []
@@ -24,7 +24,7 @@ export const BlogListScroll = props => {
   if (posts) {
     const totalCount = posts.length
     hasMore =
-      page * parseInt(siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)) <
+      page * parseInt(siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)) <
       totalCount
   }
   const handleGetMore = () => {
