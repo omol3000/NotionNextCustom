@@ -22,8 +22,8 @@ module.exports = {
   CONTACT_WEHCHAT_PUBLIC: process.env.NEXT_PUBLIC_CONTACT_WEHCHAT_PUBLIC || '', // 微信公众号 格式：https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=【xxxxxx】==#wechat_redirect
 
   // Footer Links (Impressum, Datenschutz, etc.)
-  FOOTER_LINK_1_TITLE: process.env.NEXT_PUBLIC_FOOTER_LINK_1_TITLE || '', // z.B. "Impressum"
-  FOOTER_LINK_1_URL: process.env.NEXT_PUBLIC_FOOTER_LINK_1_URL || '', // z.B. "/impressum"
-  FOOTER_LINK_2_TITLE: process.env.NEXT_PUBLIC_FOOTER_LINK_2_TITLE || '', // z.B. "Datenschutz"
-  FOOTER_LINK_2_URL: process.env.NEXT_PUBLIC_FOOTER_LINK_2_URL || '' // z.B. "/datenschutz"
+  FOOTER_LINK_1_TITLE: process.env.NEXT_PUBLIC_FOOTER_LINK_1_TITLE || 'Impressum',
+  FOOTER_LINK_1_URL: process.env.NEXT_PUBLIC_FOOTER_LINK_1_URL || 'https://growhuman.io/impressum.html',
+  FOOTER_LINK_2_TITLE: process.env.NEXT_PUBLIC_FOOTER_LINK_2_TITLE || 'Datenschutz',
+  FOOTER_LINK_2_URL: process.env.NEXT_PUBLIC_FOOTER_LINK_2_URL || 'https://learn.growhuman.io/privacy'
 }
