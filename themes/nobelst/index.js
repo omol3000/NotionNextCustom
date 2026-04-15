@@ -136,7 +136,7 @@ const LayoutPostList = props => {
     <>
       {topSlot}
       {tag && <SearchNavBar {...props} />}
-      {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
+      {siteConfig('POST_LIST_STYLE', 'scroll', props?.NOTION_CONFIG) === 'page' ? (
         <BlogListPage {...props} posts={filteredBlogPosts} />
       ) : (
         <BlogListScroll {...props} posts={filteredBlogPosts} />
@@ -182,7 +182,7 @@ const LayoutSearch = props => {
   return (
     <>
       <SearchNavBar {...props} />
-      {siteConfig('POST_LIST_STYLE', 'page', props?.NOTION_CONFIG) === 'page' ? (
+      {siteConfig('POST_LIST_STYLE', 'scroll', props?.NOTION_CONFIG) === 'page' ? (
         <BlogListPage {...props} posts={filteredBlogPosts} />
       ) : (
         <BlogListScroll {...props} posts={filteredBlogPosts} />
