@@ -12,6 +12,8 @@ export const config = {
   matcher: ['/((?!.*\\..*|_next|/sign-in|/auth).*)', '/', '/(api|trpc)(.*)']
 }
 
+const SCANNER_PATTERN = /^\/(?:\.env|\.git|\.aws|\.ssh|\.svn|\.hg|\.DS_Store|\.vscode|wp-admin|wp-login|wp-includes|wp-content|admin|administrator|phpmyadmin|cgi-bin|xmlrpc\.php|readme\.html|license\.txt|config\.php|\.well-known|sites\/default|uploads|vendor|node_modules|backup|\.htaccess|\.htpasswd|server-status|actuator)(\/|$)/i
+
 // 限制登录访问的路由
 const isTenantRoute = createRouteMatcher([
   '/user/organization-selector(.*)',
@@ -34,6 +36,10 @@ const isTenantAdminRoute = createRouteMatcher([
  */
 // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const noAuthMiddleware = async (req: NextRequest, ev: any) => {
+  if (SCANNER_PATTERN.test(req.nextUrl.pathname)) {
+    return new NextResponse(null, { status: 404 })
+  }
+
   // 如果没有配置 Clerk 相关环境变量，返回一个默认响应或者继续处理请求
   if (BLOG['UUID_REDIRECT']) {
     let redirectJson: Record<string, string> = {}
@@ -65,6 +71,10 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
  */
 const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
   ? clerkMiddleware((auth, req) => {
+      if (SCANNER_PATTERN.test(req.nextUrl.pathname)) {
+        return new NextResponse(null, { status: 404 })
+      }
+
       const { userId } = auth()
       // 处理 /dashboard 路由的登录保护
       if (isTenantRoute(req)) {
