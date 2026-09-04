@@ -7,6 +7,7 @@ import { generateSitemapXml } from '@/lib/utils/sitemap.xml'
 import { DynamicLayout } from '@/themes/theme'
 import { generateRedirectJson } from '@/lib/utils/redirect'
 import { checkDataFromAlgolia } from '@/lib/plugins/algolia'
+import { isBuildPhase } from '@/lib/utils/buildMode'
 
 /**
  * 首页布局
@@ -56,18 +57,25 @@ export async function getStaticProps(req) {
     }
   }
 
-  // 生成robotTxt
-  generateRobotsTxt(props)
-  // 生成Feed订阅
-  generateRss(props)
-  // 生成
-  generateSitemapXml(props)
+  // 以下任务都会向 public/ 写入静态文件。
+  // 在 Vercel 运行时文件系统是只读的，写入必然失败，但生成过程本身
+  // （尤其 generateRss 会为每篇文章拉取 blockMap 并做服务端渲染）
+  // 仍会消耗大量 Notion API 请求和 CPU。故仅在编译阶段执行。
+  if (isBuildPhase()) {
+    // 生成robotTxt
+    generateRobotsTxt(props)
+    // 生成Feed订阅
+    generateRss(props)
+    // 生成
+    generateSitemapXml(props)
+    if (siteConfig('UUID_REDIRECT', null, props?.NOTION_CONFIG)) {
+      // 生成重定向 JSON
+      generateRedirectJson(props)
+    }
+  }
+
   // 检查数据是否需要从algolia删除
   checkDataFromAlgolia(props)
-  if (siteConfig('UUID_REDIRECT', null, props?.NOTION_CONFIG)) {
-    // 生成重定向 JSON
-    generateRedirectJson(props)
-  }
 
   // 生成全文索引 - 仅在 yarn build 时执行 && process.env.npm_lifecycle_event === 'build'
 
