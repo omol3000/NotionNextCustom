@@ -65,7 +65,9 @@ export async function getStaticProps(req) {
     // 生成robotTxt
     generateRobotsTxt(props)
     // 生成Feed订阅
-    generateRss(props)
+    // 必须 await：generateRss 是异步的，不等待会与 Next.js
+    // 收集 public/ 静态文件的步骤形成竞态，导致 feed.xml 有时不落盘。
+    await generateRss(props)
     // 生成
     generateSitemapXml(props)
     if (siteConfig('UUID_REDIRECT', null, props?.NOTION_CONFIG)) {
