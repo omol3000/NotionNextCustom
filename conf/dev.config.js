@@ -11,10 +11,10 @@ module.exports = {
   // Redis 缓存数据库地址
   REDIS_URL: process.env.REDIS_URL || '',
 
-  ENABLE_CACHE:
-    process.env.ENABLE_CACHE ||
-    process.env.npm_lifecycle_event === 'build' ||
-    process.env.npm_lifecycle_event === 'export', // 在打包过程中默认开启缓存，开发或运行时开启此功能意义不大。
+  // 运行时也必须开启：fetchGlobalAllData 在一次渲染里会对同一个 pageId
+  // 重复取数，关闭读取会让每次渲染都向 Notion 发两遍完整请求。
+  // 设置环境变量 ENABLE_CACHE=false 可关闭。
+  ENABLE_CACHE: process.env.ENABLE_CACHE || true,
   isProd: process.env.VERCEL_ENV === 'production' || process.env.EXPORT, // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)
   BUNDLE_ANALYZER: process.env.ANALYZE === 'true' || false, // 是否展示编译依赖内容与大小
   VERSION: (() => {
