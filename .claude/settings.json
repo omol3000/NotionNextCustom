@@ -1,0 +1,3 @@
+{
+  "enabledMcpjsonServers": ["s3-upload-cloud", "n8n-cloud"]
+}
